@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div style="width: 100%;height: 70px;background: #212A31;">
+		<div style="width: 100%;height: 60px;background: #212A31;">
 			<el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
 			  <el-radio-button :label="false">展开</el-radio-button>
 			  <el-radio-button :label="true">收起</el-radio-button>
@@ -62,7 +62,6 @@
 				</transition>
 			</div>
 		</div>
-		<div style="width: 100%;height: 70px;background: #212A31;"></div>
 	</div>
 </template>
 
@@ -79,7 +78,7 @@
 			let indexBodyHeight = this.$refs.IndexBody.style.height;
 			let documentHeight = document.documentElement.clientHeight || document.body.clientHeight;
 			if(documentHeight > parseInt(indexBodyHeight)){
-				 this.$refs.IndexBody.style.height = documentHeight-124 +"px";
+				 this.$refs.IndexBody.style.height = documentHeight-50 +"px";
 			}
 			/* 动态设置网页主题高度End */
 			if(this.isCollapse){
