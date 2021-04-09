@@ -1,5 +1,5 @@
 import React from 'react'
-import { ConfigProvider,Form, Input, InputNumber, Button, Checkbox, DatePicker } from 'antd';
+import { ConfigProvider, Form, Input, InputNumber, Button, Checkbox, DatePicker, Tooltip } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 
 export default class extends React.Component {
@@ -22,8 +22,11 @@ export default class extends React.Component {
     componentDidUpdate() {
     }
 
-    validatePrimeNumber(number) {
-
+    validateAccount = (rule, value) => {
+        console.log(value)
+        return value ?
+            Promise.resolve() :
+            Promise.reject(new Error('Should accept agreement'))
     }
     onNumberChange = value => {
         let validateStatus = 'success'
@@ -46,21 +49,27 @@ export default class extends React.Component {
             <div>
                 <ConfigProvider locale={zhCN}>
                     <Form
-                        labelCol={{ span: 2 ,offset: 1}}
+                        labelCol={{ span: 2, offset: 1 }}
                         wrapperCol={{ span: 16 }}
                         name="test1"
                         initialValues={{ remember: true, age: this.state.age.value }}
                     >
-                        <Form.Item label="账号" name="username" hasFeedback
-                            rules={[{ required: true, pattern: "\\d{11}", message: '不符合规范' }]}
-                        >
-                            <Input allowClear placeholder=""/>
-                        </Form.Item>
+                        <Tooltip title={`账户${this.state.age.value}`}>
+                            <Form.Item label="账号" name="account" hasFeedback
+                                rules={[
+                                    {
+                                        validator: this.validateAccount,
+                                    }
+                                ]}
+                            >
+                                <Input allowClear placeholder="" />
+                            </Form.Item>
+                        </Tooltip>
 
                         <Form.Item label="密码" name="password" hasFeedback
                             rules={[{ required: true, message: '不符合规范' }]}
                         >
-                            <Input.Password allowClear/>
+                            <Input.Password allowClear />
                         </Form.Item>
 
                         <Form.Item label="年龄" name="age" hasFeedback
@@ -84,7 +93,7 @@ export default class extends React.Component {
                         </Form.Item>
                     </Form>
                 </ConfigProvider>
-            </div>
+            </div >
         );
     }
 }
