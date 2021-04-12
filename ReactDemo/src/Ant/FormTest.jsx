@@ -1,5 +1,6 @@
 import React from 'react'
-import { ConfigProvider, Form, Input, InputNumber, Button, Checkbox, DatePicker, Tooltip } from 'antd';
+import { ConfigProvider, Form, Input, InputNumber, Button, Checkbox, DatePicker, Select, Tooltip } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
 import zhCN from 'antd/lib/locale/zh_CN';
 
 export default class extends React.Component {
@@ -43,7 +44,13 @@ export default class extends React.Component {
             }
         });
     };
-
+    onSexChange = value => {
+        console.log(value)
+    }
+    onRemeberMeChange = e => {
+        console.log(e)
+        this.setState({ rememberMe: e.target.checked })
+    }
     render() {
         return (
             <div>
@@ -59,7 +66,8 @@ export default class extends React.Component {
                                 rules={[
                                     {
                                         validator: this.validateAccount,
-                                    }
+                                    },
+                                    { pattern: /^\d{11}$/, message: "必须是11位数字" }
                                 ]}
                             >
                                 <Input allowClear placeholder="" />
@@ -72,6 +80,13 @@ export default class extends React.Component {
                             <Input.Password allowClear />
                         </Form.Item>
 
+                        <Form.Item label="性别" name="sex" hasFeedback>
+                            <Select onChange={this.onSexChange}>
+                                <Select.Option value="0">女</Select.Option>
+                                <Select.Option value="1">男</Select.Option>
+                            </Select>
+                        </Form.Item>
+
                         <Form.Item label="年龄" name="age" hasFeedback
                             rules={[{ required: true }]}
                             validateStatus={this.state.age.validateStatus}
@@ -80,16 +95,19 @@ export default class extends React.Component {
                             <InputNumber value={this.state.age.value} onChange={this.onNumberChange} />
                         </Form.Item>
 
-                        <Form.Item name="date-time-picker" label="生日" >
-                            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
-                        </Form.Item>
+                        {
+                            this.state.rememberMe &&
+                            <Form.Item name="date-time-picker" label="生日" >
+                                <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
+                            </Form.Item>
+                        }
 
                         <Form.Item name="remember" valuePropName="checked">
-                            <Checkbox>记住我</Checkbox>
+                            <Checkbox onChange={this.onRemeberMeChange}>记住我</Checkbox>
                         </Form.Item>
 
                         <Form.Item >
-                            <Button type="primary" htmlType="submit">提交</Button>
+                            <Button type="primary" icon={<PoweroffOutlined />} htmlType="submit">提交</Button>
                         </Form.Item>
                     </Form>
                 </ConfigProvider>
