@@ -5,7 +5,9 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 import { BrowserRouter, Link, NavLink, Route, Switch } from 'react-router-dom'
 import Clock from '../Components/Clock';
 import About from '../About/About';
-import RefDemo from '../About/RefDemo';
+import RefDemo from '../Demo/RefDemo';
+import RouteDemo from '../Demo/RouteDemo';
+import ReduxDemo from '../Demo/ReduxDemo';
 import AntTest1 from '../Ant/AntTest1';
 import FormTest from '../Ant/FormTest';
 import Test from '../Test/Test';
@@ -19,10 +21,10 @@ export default function App() {
                 <div className="logo" />
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
                     <Menu.Item key="1">
-                        <NavLink to="/index/antTest1">蚂蚁1</NavLink>
+                        <NavLink to="/index/antTest1">表单1</NavLink>
                     </Menu.Item>
                     <Menu.Item key="2">
-                        <NavLink to="/index/antForm">表单</NavLink>
+                        <NavLink to="/index/antForm">表单2</NavLink>
                     </Menu.Item>
                     <Menu.Item key="/index/clock">
                         <NavLink to="/index/clock">时钟</NavLink>
@@ -32,6 +34,12 @@ export default function App() {
                     </Menu.Item>
                     <Menu.Item key="/index/ref">
                         <NavLink to="/index/ref">引用</NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="/index/route">
+                        <NavLink to="/index/route">路由</NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="/index/redux">
+                        <NavLink to="/index/redux">状态</NavLink>
                     </Menu.Item>
                     <Menu.Item key="/index/test">
                         <NavLink to="/index/test">测试</NavLink>
@@ -52,6 +60,8 @@ export default function App() {
                         <Route path="/index/clock" component={Clock} />
                         <Route path="/index/about" component={About} />
                         <Route path="/index/ref" component={RefDemo} />
+                        <Route path="/index/route" component={RouteDemo} />
+                        <Route path="/index/redux" component={ReduxDemo} />
                         <Route path="/index/test" component={Test} />
                     </Switch>
                 </div>

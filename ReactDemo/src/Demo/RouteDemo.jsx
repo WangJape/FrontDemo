@@ -5,7 +5,7 @@ import { DownloadOutlined } from '@ant-design/icons';
 // 由于 antd 组件的默认文案是英文，所以需要修改为中文
 import zhCN from 'antd/lib/locale/zh_CN';
 
-export default function AntTest1(props) {
+export default function RouteDemo(props) {
     const [date, setDate] = useState(null);
 
     //编程式路由
@@ -31,8 +31,7 @@ export default function AntTest1(props) {
         <ConfigProvider locale={zhCN}>
             <div>
                 <Button type="primary" shape="circle"
-                    icon={<DownloadOutlined />} onClick={gotoView}>
-                    登录
+                    icon={<DownloadOutlined />} onClick={gotoView}>跳转
                 </Button>
             </div>
         </ConfigProvider>
